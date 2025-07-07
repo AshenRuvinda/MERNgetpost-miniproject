@@ -5,7 +5,7 @@ const Card = require('../models/Card');
 
 const router = express.Router();
 
-// Multer setup for file uploads
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -16,11 +16,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// POST: Create a new product card with image
+
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const { productName, productDescription, productPrice } = req.body;
-    console.log('Received data:', { productName, productDescription, productPrice, file: req.file }); // Log data
+    console.log('Received data:', { productName, productDescription, productPrice, file: req.file }); 
     if (!productName || !productDescription || !productPrice || !req.file) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
@@ -39,7 +39,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
-// GET: Fetch all cards
+
 router.get('/', async (req, res) => {
   try {
     const cards = await Card.find();
